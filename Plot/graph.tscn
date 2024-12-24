@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfouncjiebr5x"]
+[gd_scene load_steps=4 format=3 uid="uid://dfouncjiebr5x"]
 
 [ext_resource type="Script" path="res://Plot/graph.gd" id="1_4gm7v"]
 [ext_resource type="Script" path="res://Plot/Graduation/graduation_calculatiion.gd" id="2_s3qre"]
+[ext_resource type="Texture2D" uid="uid://n3vpwldlib21" path="res://icon.svg" id="3_0u6l1"]
 
-[node name="Control" type="Control"]
+[node name="Graph" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,6 +102,8 @@ custom_minimum_size = Vector2(2000, 2000)
 layout_mode = 2
 offset_right = 2000.0
 offset_bottom = 2000.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_4gm7v")
 chart = PackedVector2Array(0, 0, 100, 300, 400, 500, 1152, 307)
@@ -117,6 +120,20 @@ min_x = NodePath("../../../../XAxis/XGraduation/Xmin")
 max_x = NodePath("../../../../XAxis/XGraduation/Xmax")
 min_y = NodePath("../../../../../YAxis/YGraduation/YMin")
 max_y = NodePath("../../../../../YAxis/YGraduation/Ymax")
+
+[node name="TextureRect" type="TextureRect" parent="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease/InnerGraph"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0u6l1")
+
+[node name="Label" type="Label" parent="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="XAxis" type="BoxContainer" parent="YGraphContainer/XGraphContainer"]
 layout_mode = 2
