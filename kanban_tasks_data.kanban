@@ -1,0 +1,97 @@
+{
+	"categories": [
+		{
+			"uuid": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
+			"title": "Task",
+			"color": "70bafa"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "b8fbbc18-6dd9-4529-b9d5-bf1afee5c598",
+			"title": "Todo",
+			"tasks": [
+				"ca0aa5c1-199c-4685-a211-6fd895562730",
+				"ad7647e6-19c2-4380-815e-72138611a9ee"
+			]
+		},
+		{
+			"uuid": "2bcf81d9-f2d8-4d69-98fb-768ae372a386",
+			"title": "Doing",
+			"tasks": [
+				"a5f79950-73d4-4513-90a4-84b15464b963"
+			]
+		},
+		{
+			"uuid": "30114b08-04ee-45ab-9d19-0ae3ebbfabd5",
+			"title": "Done",
+			"tasks": [
+				"0b0aca5f-dfb2-4556-93e1-989b4be7e120",
+				"d15e6d74-30a5-4b86-8ba2-6cdd88c2791e"
+			]
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "d15e6d74-30a5-4b86-8ba2-6cdd88c2791e",
+			"title": "Read the doc for canvas drawing",
+			"description": "https://docs.godotengine.org/en/stable/classes/class_canvasitem.html#class-canvasitem-method-draw-char",
+			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
+			"steps": []
+		},
+		{
+			"uuid": "ca0aa5c1-199c-4685-a211-6fd895562730",
+			"title": "List all the needed elements, organise them",
+			"description": "",
+			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
+			"steps": []
+		},
+		{
+			"uuid": "ad7647e6-19c2-4380-815e-72138611a9ee",
+			"title": "Get all the formulas for chromatography calculations",
+			"description": "",
+			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
+			"steps": []
+		},
+		{
+			"uuid": "0b0aca5f-dfb2-4556-93e1-989b4be7e120",
+			"title": "Chart ? Plot ? Graph ???",
+			"description": "Chart: A broad term for any visual data representation, including graphs and other forms of data visualization.\n\nGraph: A type of chart that shows the relationship between variables, usually involving axes and points.\n\nPlot: The act of placing data points on a graph, or the resulting diagram from this action.",
+			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
+			"steps": []
+		},
+		{
+			"uuid": "a5f79950-73d4-4513-90a4-84b15464b963",
+			"title": "Make the graph system",
+			"description": "",
+			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
+			"steps": [
+				{
+					"details": "Panning",
+					"done": true
+				},
+				{
+					"details": "Zooming",
+					"done": true
+				},
+				{
+					"details": "Graduation",
+					"done": false
+				}
+			]
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"b8fbbc18-6dd9-4529-b9d5-bf1afee5c598"
+			],
+			[
+				"2bcf81d9-f2d8-4d69-98fb-768ae372a386"
+			],
+			[
+				"30114b08-04ee-45ab-9d19-0ae3ebbfabd5"
+			]
+		]
+	}
+}
