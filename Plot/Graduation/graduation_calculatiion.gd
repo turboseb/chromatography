@@ -19,6 +19,6 @@ func recalculate() ->void:
 	min_x.text = "%.1f" % (-graph.position.x / graph.size.x / graph.scale.x * 100) + "%"
 	max_x.text = "%.1f" % ((-graph.position.x + graph_container_size.x) / graph.size.x / graph.scale.x * 100) + "%"
 	
-	## these dont even need to use the y scale value, but in case of potential future modifications, they're kept that way
+	
 	min_y.text = "%.1f" % (100 - (-graph.position.y / graph.size.y / graph.scale.y * 100)) + "%"
 	max_y.text = "%.1f" % (100 - (-graph.position.y + graph_container_size.y) / graph.size.y / graph.scale.y * 100) + "%"

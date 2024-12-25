@@ -77,6 +77,10 @@
 				{
 					"details": "Graduation",
 					"done": false
+				},
+				{
+					"details": "Scrolling",
+					"done": false
 				}
 			]
 		}

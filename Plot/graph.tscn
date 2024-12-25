@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfouncjiebr5x"]
+[gd_scene load_steps=5 format=3 uid="uid://dfouncjiebr5x"]
 
 [ext_resource type="Script" path="res://Plot/graph.gd" id="1_4gm7v"]
 [ext_resource type="Script" path="res://Plot/Graduation/graduation_calculatiion.gd" id="2_s3qre"]
 [ext_resource type="Texture2D" uid="uid://n3vpwldlib21" path="res://icon.svg" id="3_0u6l1"]
+[ext_resource type="Script" path="res://visualisation of inputs/button.gd" id="4_du0dc"]
 
 [node name="Graph" type="Control"]
 layout_mode = 3
@@ -100,18 +101,21 @@ size_flags_vertical = 3
 [node name="InnerGraph" type="ColorRect" parent="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease" node_paths=PackedStringArray("graph_container", "graduation")]
 custom_minimum_size = Vector2(2000, 2000)
 layout_mode = 2
-offset_right = 2000.0
-offset_bottom = 2000.0
+offset_left = -472.0
+offset_top = -718.0
+offset_right = 1528.0
+offset_bottom = 1282.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_4gm7v")
 chart = PackedVector2Array(0, 0, 100, 300, 400, 500, 1152, 307)
 line_color = Color(1, 0, 0, 1)
-line_width = -5.0
+line_width = -500.0
 graph_container = NodePath("../..")
 graduation = NodePath("GraduationCalculatiion")
 zoom_step = 0.06
+scroll_step = 5.0
 
 [node name="GraduationCalculatiion" type="Node" parent="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease/InnerGraph" node_paths=PackedStringArray("graph", "min_x", "max_x", "min_y", "max_y")]
 script = ExtResource("2_s3qre")
@@ -122,6 +126,7 @@ min_y = NodePath("../../../../../YAxis/YGraduation/YMin")
 max_y = NodePath("../../../../../YAxis/YGraduation/Ymax")
 
 [node name="TextureRect" type="TextureRect" parent="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease/InnerGraph"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -159,6 +164,42 @@ size_flags_horizontal = 4
 text = "X axis
 "
 horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 94.0
+offset_top = 20.0
+offset_right = 134.0
+offset_bottom = 60.0
+
+[node name="BoxContainer" type="BoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button3" type="Button" parent="Control/BoxContainer"]
+layout_mode = 2
+disabled = true
+button_mask = 0
+text = "Shift"
+script = ExtResource("4_du0dc")
+input_name = "shift"
+
+[node name="Button" type="Button" parent="Control/BoxContainer"]
+layout_mode = 2
+disabled = true
+button_mask = 0
+text = "Ctrl"
+script = ExtResource("4_du0dc")
+input_name = "control"
+
+[node name="Button2" type="Button" parent="Control/BoxContainer"]
+layout_mode = 2
+disabled = true
+button_mask = 0
+text = "Alt"
+script = ExtResource("4_du0dc")
+input_name = "alt"
 
 [connection signal="resized" from="YGraphContainer/XGraphContainer/GraphContainer" to="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease/InnerGraph" method="graph_container_resized"]
 [connection signal="gui_input" from="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease/InnerGraph" to="YGraphContainer/XGraphContainer/GraphContainer/ContainerRelease/InnerGraph" method="_on_gui_input"]
