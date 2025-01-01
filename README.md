@@ -5,7 +5,7 @@ Currently in progress, the program is designed to simulate factors like solvent 
 
 ## Current progress
 - **Interactive Chart Window** with scroll, pan and zoom
-<img src="https://github.com/turboseb/chromatography/blob/master/GitHub%20Images/example_chart.png" width="500">
+<img src="https://github.com/turboseb/chromatography/blob/master/Illustration/chart.gif" width="500">
 
 ## Built in
 **Godot 4.3.stable** which allows for great flexibility and cross-platform compatibility

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://l1u342n0nnp3"
-path="res://.godot/imported/example_chart.png-c87a5fc8bd5bd5186faa2918ccdf5d0c.ctex"
+path="res://.godot/imported/example_chart.png-533f52c35939a7e94003687d1a18b9b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GitHub Images/example_chart.png"
-dest_files=["res://.godot/imported/example_chart.png-c87a5fc8bd5bd5186faa2918ccdf5d0c.ctex"]
+source_file="res://Illustration/example_chart.png"
+dest_files=["res://.godot/imported/example_chart.png-533f52c35939a7e94003687d1a18b9b9.ctex"]
 
 [params]
 
