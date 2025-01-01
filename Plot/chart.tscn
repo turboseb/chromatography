@@ -43,7 +43,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme = ExtResource("1_u4qrr")
 theme_override_font_sizes/font_size = 40
-text = "Grid Test Graph"
+text = "Example Chart"
 
 [node name="YChartContainer" type="BoxContainer" parent="MarginContainer/ChartContainer"]
 layout_mode = 2
