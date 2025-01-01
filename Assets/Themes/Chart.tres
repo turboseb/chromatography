@@ -1,0 +1,5 @@
+[gd_resource type="Theme" format=3 uid="uid://pmfhiucv8n2o"]
+
+[resource]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/fonts/font = null

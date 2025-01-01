@@ -3,7 +3,7 @@ extends Button
 @export var input_name: String
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed(input_name):
 		disabled = false
 		
