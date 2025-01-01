@@ -3,8 +3,8 @@ This project is an **ongoing development** of a **chromatography simulation tool
 
 Currently in progress, the program is designed to simulate factors like solvent flow, sample migration, and interactions with different media, providing a visual representation of how different chromatography processes unfold over time.
 
-## Curent progress
-- **Interactive Graph Window** with scroll, pan and zoom
+## Current progress
+- **Interactive Chart Window** with scroll, pan and zoom
 <img src="https://github.com/turboseb/chromatography/blob/master/GitHub%20Images/example_chart.png" width="500">
 
 ## Built in
