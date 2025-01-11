@@ -1,18 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0qu5s3cpvb1w"]
+[gd_scene load_steps=7 format=3 uid="uid://d0qu5s3cpvb1w"]
 
 [ext_resource type="Script" path="res://Plot/inner_plot.gd" id="1_iv7n1"]
+[ext_resource type="Script" path="res://Plot/chart.gd" id="1_mtoxi"]
 [ext_resource type="Theme" uid="uid://pmfhiucv8n2o" path="res://Assets/Themes/Chart.tres" id="1_u4qrr"]
 [ext_resource type="Script" path="res://Plot/x_grid.gd" id="2_48y3q"]
 [ext_resource type="Script" path="res://Plot/y_grid.gd" id="3_p2hl4"]
 [ext_resource type="Script" path="res://visualisation of inputs/button.gd" id="4_aglfa"]
 
-[node name="Chart" type="ColorRect"]
+[node name="Chart" type="ColorRect" node_paths=PackedStringArray("plot")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.154876, 0.154876, 0.154876, 1)
+script = ExtResource("1_mtoxi")
+plot = NodePath("MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
