@@ -1,12 +1,15 @@
 extends Control
 
 @export_category("Chart Data")
-@export var chart: PackedVector2Array
-@export var line_color: Color
+
 ## if the value is positive, it will scale with the zoom; if the vale is negative, the line width will be viewport based and it won't be affected by zoom
 @export var line_width: float
 
 @export_category("Tree Nodes")
+
+## Root node of the chart tool
+@export var chart: ColorRect
+
 ## Control parent of the InnerPlot, used to get the plot visible size
 @export var plot_container: Control
 var plot_container_size: Vector2: 
@@ -39,6 +42,12 @@ var panning_limit: Vector2
 ##define the maximum scale to avoid exiting the plot
 var scale_limit: Vector2
 
+func _ready() -> void:
+	chart.datasets_changed.connect(dataset_changed)
+
+func dataset_changed() ->void:
+	queue_redraw()
+	#TODO add label redo
 
 ## Connected to the plot_container resized() signal, called a little after ready on startup
 func plot_container_resized() -> void:
@@ -78,8 +87,9 @@ func set_scale_limit() ->void:
 
 
 func _draw() -> void:
-	draw_polyline(chart, line_color, line_width)
-	
+	for dataset in chart.datasets.size():
+		draw_polyline(chart.datasets.values()[dataset], chart.line_color[dataset], line_width)
+
 ## Called when the input is done as the plot is moused over, also works when releasing said input outside of the plot
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0qu5s3cpvb1w"]
+[gd_scene load_steps=9 format=3 uid="uid://d0qu5s3cpvb1w"]
 
 [ext_resource type="Script" path="res://Plot/inner_plot.gd" id="1_iv7n1"]
 [ext_resource type="Script" path="res://Plot/chart.gd" id="1_mtoxi"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Plot/x_grid.gd" id="2_48y3q"]
 [ext_resource type="Script" path="res://Plot/y_grid.gd" id="3_p2hl4"]
 [ext_resource type="Script" path="res://visualisation of inputs/button.gd" id="4_aglfa"]
+[ext_resource type="Script" path="res://Plot/Labels/label_container.gd" id="6_4vejy"]
+[ext_resource type="PackedScene" uid="uid://detmflvrt1g70" path="res://Plot/Labels/dataset_label.tscn" id="7_6lwvq"]
 
 [node name="Chart" type="ColorRect" node_paths=PackedStringArray("plot")]
 anchors_preset = 15
@@ -13,9 +15,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.154876, 0.154876, 0.154876, 1)
+color = Color(0.332881, 0.332881, 0.332881, 1)
 script = ExtResource("1_mtoxi")
 plot = NodePath("MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot")
+datasets = {
+"Test1": PackedVector2Array(0, 0, 2000, 2000),
+"Test2": PackedVector2Array(0, 0, 1000, 2000)
+}
+line_color = PackedColorArray(1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -125,7 +132,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="InnerPlot" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" node_paths=PackedStringArray("plot_container", "x_grid", "y_grid")]
+[node name="InnerPlot" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" node_paths=PackedStringArray("chart", "plot_container", "x_grid", "y_grid")]
 z_index = 1
 custom_minimum_size = Vector2(2000, 2000)
 layout_mode = 1
@@ -138,9 +145,8 @@ grow_vertical = 0
 size_flags_vertical = 3
 color = Color(0.305882, 0.305882, 0.305882, 0)
 script = ExtResource("1_iv7n1")
-chart = PackedVector2Array(0, 0, 100, 300, 400, 500, 1152, 307)
-line_color = Color(1, 0, 0, 1)
 line_width = -1.0
+chart = NodePath("../../../../../../../..")
 plot_container = NodePath("..")
 x_grid = NodePath("../../../XMargin/Control/XGrid")
 y_grid = NodePath("../../../YMargin/Control/YGrid")
@@ -235,6 +241,47 @@ theme = ExtResource("1_u4qrr")
 text = "X axis
 "
 horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ChartContainer/YChartContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+
+[node name="LabelContainer" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+color = Color(0.151276, 0.151276, 0.151276, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer" node_paths=PackedStringArray("chart", "box_container")]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("6_4vejy")
+chart = NodePath("../../../../..")
+box_container = NodePath("BoxContainer")
+dataset_label = ExtResource("7_6lwvq")
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+vertical = true
+
+[node name="RichTextLabel" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer/MarginContainer/BoxContainer" instance=ExtResource("7_6lwvq")]
+layout_mode = 2
+text = "a"
+
+[node name="RichTextLabel2" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer/MarginContainer/BoxContainer" instance=ExtResource("7_6lwvq")]
+layout_mode = 2
+text = "s"
+
+[node name="RichTextLabel3" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer/MarginContainer/BoxContainer" instance=ExtResource("7_6lwvq")]
+layout_mode = 2
+
+[node name="RichTextLabel4" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer/MarginContainer/BoxContainer" instance=ExtResource("7_6lwvq")]
+layout_mode = 2
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0

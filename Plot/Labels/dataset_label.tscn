@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://detmflvrt1g70"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+bbcode_enabled = true
+text = " "
+fit_content = true
+autowrap_mode = 0
