@@ -25,7 +25,9 @@ func axis_setup()->void:
 		new_label.theme = chart_theme
 		new_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		new_label.position = Vector2(text_margin / 2.0, point * tick_step * 100 - 20)
+		##HACK - Commenter le positionnement, (size.y/tick_step / 100 - point) représente la position pour l'axe y inversé
+		new_label.position = Vector2(text_margin / 2.0, (size.y/tick_step / 100 - point) * tick_step * 100 + 5)
+		##
 		new_label.text = str(size.y/tick_step / 100 - point)
 	_on_inner_plot_item_rect_changed()
 

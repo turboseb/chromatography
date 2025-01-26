@@ -20,7 +20,7 @@ func axis_setup()->void:
 	for child in get_children():
 		child.queue_free()
 	#add labels to the grid tick_marks
-	for point in range(0, size.x/tick_step / 100):
+	for point in range(0, size.x/tick_step / 100 + 1):
 		var new_label: Label = Label.new()
 		add_child(new_label)
 		labels.append(new_label)

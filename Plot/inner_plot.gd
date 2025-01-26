@@ -65,7 +65,7 @@ func clamp_position(new_position_x = null, new_position_y = null) ->void:
 	if new_position_x:
 		position.x = clamp(new_position_x, panning_limit.x, 0)
 	if new_position_y:
-		position.y = clamp(new_position_y, panning_limit.y, 0)
+		position.y = clamp(new_position_y, plot_container_size.y, panning_limit.y)
 	item_rect_changed.emit()
 
 ## called by plot_container_resized(), can't be used by zoom functions as they need the zoom ratio to calculate the position offset
@@ -73,16 +73,18 @@ func clamp_scale(new_scale_x = null, new_scale_y = null) ->void:
 	set_scale_limit()
 	if new_scale_x:
 		scale.x = max(new_scale_x, scale_limit.x)
-		scale.y = max(new_scale_y, scale_limit.y)
+		scale.y = min(new_scale_y, scale_limit.y)
 	item_rect_changed.emit()
 
 ## FIXME called by clamp_position(), could be called when the plot is resized and on plot_container_resized() to call it less often
 func set_panning_limit() ->void:
-	panning_limit = plot_container_size - size * scale
+	panning_limit.x = plot_container_size.x - size.x * scale.x
+	panning_limit.y = size.y * abs(scale.y)
+	
 
 func set_scale_limit() ->void:
 	var scale_limit_x =  plot_container_size.x / size.x
-	var scale_limit_y =  plot_container_size.y / size.y
+	var scale_limit_y =  -plot_container_size.y / size.y
 	scale_limit = Vector2(scale_limit_x, scale_limit_y)
 
 
@@ -185,7 +187,7 @@ func zoom_out_x() ->float:
 
 
 func zoom_in_y() ->float:
-	var new_scale_y: float = scale.y + zoom_step
+	var new_scale_y: float = scale.y - zoom_step
 	var scale_ratio_y: float = new_scale_y/scale.y - 1.0
 				
 	var new_position_y: float = position.y + (global_position.y - get_viewport().get_mouse_position().y) * scale_ratio_y
@@ -194,7 +196,7 @@ func zoom_in_y() ->float:
 
 
 func zoom_out_y() -> float:
-	var new_scale_y: float = max(scale.y - zoom_step, scale_limit.y)
+	var new_scale_y: float = min(scale.y + zoom_step, scale_limit.y)
 	var scale_ratio_y: float = new_scale_y/scale.y - 1.0
 				
 	var new_position_y: float = position.y + (global_position.y - get_viewport().get_mouse_position().y) * scale_ratio_y
