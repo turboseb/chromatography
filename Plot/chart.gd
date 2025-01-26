@@ -11,3 +11,10 @@ signal datasets_changed
 			datasets_changed.emit()
 
 @export var line_color: PackedColorArray
+
+func add_dataset(data_name: String, dataset: PackedVector2Array) ->void:
+	var corr_dataset: PackedVector2Array
+	for data: Vector2 in dataset:
+		corr_dataset.append(data * 100.0)
+	datasets.get_or_add(data_name, corr_dataset)
+	datasets_changed.emit()
