@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://cionqtlw24s6s"]
+
+[ext_resource type="Script" path="res://ModulableSystem/modulable_system.gd" id="1_tro2d"]
+[ext_resource type="Shape2D" uid="uid://b8arpgncsotbb" path="res://ModulableSystem/circle_connection.tres" id="2_csdqa"]
+[ext_resource type="Texture2D" uid="uid://n3vpwldlib21" path="res://icon.svg" id="2_op4tn"]
+
+[node name="ModulableSystem" type="GraphEdit"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 33.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/connection_hover_tint_color = Color(0, 0.897687, 0, 1)
+theme_override_colors/connection_valid_target_tint_color = Color(0.533037, 0.533037, 0.533037, 1)
+show_grid = false
+snapping_enabled = false
+right_disconnects = true
+zoom_min = 1.0
+zoom_max = 1.0
+minimap_enabled = false
+show_menu = false
+script = ExtResource("1_tro2d")
+metadata/_edit_vertical_guides_ = [0.0]
+metadata/_edit_horizontal_guides_ = [2.0]
+
+[node name="GraphNode" type="GraphNode" parent="."]
+layout_mode = 2
+offset_left = 101.935
+offset_top = 213.0
+offset_right = 299.935
+offset_bottom = 438.0
+mouse_filter = 1
+position_offset = Vector2(101.935, 213)
+title = "Test"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(0, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(0, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+metadata/right_slot_image = ExtResource("2_csdqa")
+metadata/left_slot_image = ExtResource("2_csdqa")
+
+[node name="TextureRect" type="TextureRect" parent="GraphNode"]
+layout_mode = 2
+texture = ExtResource("2_op4tn")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="GraphNode2" type="GraphNode" parent="."]
+layout_mode = 2
+offset_left = 435.0
+offset_top = 103.0
+offset_right = 633.0
+offset_bottom = 328.0
+mouse_filter = 1
+position_offset = Vector2(435, 103)
+title = "Test"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(0, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 2
+slot/0/right_color = Color(0, 1, 0, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+metadata/right_slot_image = ExtResource("2_csdqa")
+metadata/left_slot_image = ExtResource("2_csdqa")
+
+[node name="TextureRect" type="TextureRect" parent="GraphNode2"]
+layout_mode = 2
+texture = ExtResource("2_op4tn")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="GraphNode3" type="GraphNode" parent="."]
+layout_mode = 2
+offset_left = 685.0
+offset_top = 283.0
+offset_right = 883.0
+offset_bottom = 508.0
+mouse_filter = 1
+position_offset = Vector2(685, 283)
+title = "Test"
+slot/0/left_enabled = true
+slot/0/left_type = 2
+slot/0/left_color = Color(0, 1, 0, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(0, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+metadata/right_slot_image = ExtResource("2_csdqa")
+metadata/left_slot_image = ExtResource("2_csdqa")
+
+[node name="TextureRect" type="TextureRect" parent="GraphNode3"]
+layout_mode = 2
+texture = ExtResource("2_op4tn")
+expand_mode = 4
+stretch_mode = 4
+
+[connection signal="connection_request" from="." to="." method="_on_connection_request"]
+[connection signal="disconnection_request" from="." to="." method="_on_disconnection_request"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -7,6 +7,7 @@ extends Node
 @export var retention_time: float
 @export var peak_width: float
 @export var asymmetry: float
+##add noise
 
 func _ready() -> void:
 	var dataset: PackedVector2Array

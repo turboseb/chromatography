@@ -25,13 +25,14 @@
 		{
 			"uuid": "2bcf81d9-f2d8-4d69-98fb-768ae372a386",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"256a6677-1a89-4518-b83b-2d503b7abe6c"
+			]
 		},
 		{
 			"uuid": "30114b08-04ee-45ab-9d19-0ae3ebbfabd5",
 			"title": "Done",
 			"tasks": [
-				"0b0aca5f-dfb2-4556-93e1-989b4be7e120",
 				"d15e6d74-30a5-4b86-8ba2-6cdd88c2791e",
 				"a5f79950-73d4-4513-90a4-84b15464b963"
 			]
@@ -40,7 +41,7 @@
 			"uuid": "a69ac26e-2cf9-454e-a80c-ad0366640f34",
 			"title": "IDEAS",
 			"tasks": [
-				"256a6677-1a89-4518-b83b-2d503b7abe6c"
+				"0b0aca5f-dfb2-4556-93e1-989b4be7e120"
 			]
 		}
 	],
@@ -113,7 +114,7 @@
 			"uuid": "256a6677-1a89-4518-b83b-2d503b7abe6c",
 			"title": "Use the graph nodes for instrument assembly",
 			"description": "",
-			"category": "2d3bb556-f1e8-4f8d-974f-f76207b4789a",
+			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
 			"steps": []
 		},
 		{
