@@ -84,9 +84,9 @@ func plot_container_resized() -> void:
 @warning_ignore("untyped_declaration")
 func clamp_position(new_position_x = null, new_position_y = null) ->void:
 	set_panning_limit()
-	if new_position_x != 10e500:
+	if new_position_x:
 		position.x = clamp(new_position_x, panning_limit.x, 0)
-	if new_position_y != 10e500:
+	if new_position_y:
 		position.y = clamp(new_position_y, plot_container_size.y, panning_limit.y)
 	item_rect_changed.emit()
 
