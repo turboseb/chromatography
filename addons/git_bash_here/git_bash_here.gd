@@ -38,3 +38,4 @@ func git_bash_here() -> void:
 	var command: String = 'cd %s  && start "" "C:\\Program Files\\Git\\bin\\sh.exe" && exit' % path
 
 	OS.create_process("cmd.exe", ["/c", command], true)
+#
