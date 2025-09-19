@@ -18,8 +18,7 @@
 			"tasks": [
 				"ca0aa5c1-199c-4685-a211-6fd895562730",
 				"ad7647e6-19c2-4380-815e-72138611a9ee",
-				"b60e45fa-5dce-4873-91cd-9e96eb6b413a",
-				"2a90665d-b8b0-4bfa-845e-8731d1fb0d6e"
+				"fa02435b-abe2-4235-b6f7-89769aa69105"
 			]
 		},
 		{
@@ -34,7 +33,9 @@
 			"title": "Done",
 			"tasks": [
 				"d15e6d74-30a5-4b86-8ba2-6cdd88c2791e",
-				"a5f79950-73d4-4513-90a4-84b15464b963"
+				"a5f79950-73d4-4513-90a4-84b15464b963",
+				"2a90665d-b8b0-4bfa-845e-8731d1fb0d6e",
+				"b60e45fa-5dce-4873-91cd-9e96eb6b413a"
 			]
 		},
 		{
@@ -63,7 +64,7 @@
 		{
 			"uuid": "ad7647e6-19c2-4380-815e-72138611a9ee",
 			"title": "Get all the formulas for chromatography calculations",
-			"description": "",
+			"description": "Impact of analyte amounts, temperature, flow, ...",
 			"category": "2d3bb556-f1e8-4f8d-974f-f76207b4789a",
 			"steps": []
 		},
@@ -127,6 +128,13 @@
 		{
 			"uuid": "2a90665d-b8b0-4bfa-845e-8731d1fb0d6e",
 			"title": "Resize inner plot based on data range",
+			"description": "",
+			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
+			"steps": []
+		},
+		{
+			"uuid": "fa02435b-abe2-4235-b6f7-89769aa69105",
+			"title": "Dynamic Graduation",
 			"description": "",
 			"category": "6ab3f95b-8ddf-4292-bc14-1d452d3a80ea",
 			"steps": []

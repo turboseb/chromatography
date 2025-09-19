@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Chromatography"
-run/main_scene="res://Plot/chart.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="res://chromatography_apparatus.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [editor_plugins]
 

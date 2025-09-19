@@ -4,10 +4,10 @@ extends GraphEdit
 
 func _on_connection_request(from_node: StringName, from_port: int, to_node: StringName, to_port: int) -> void:
 	if from_node == to_node: return
-	var connections = get_connection_list()
+	var current_connections: Array[Dictionary] = get_connection_list()
 	
 	## Check if the ports are already connected
-	for connection in connections:
+	for connection in current_connections:
 		if connection.get("from_node") == from_node or connection.get("to_node") == to_node:
 			disconnect_node(connection.get("from_node"), connection.get("from_port"), connection.get("to_node"), connection.get("to_port"))
 			

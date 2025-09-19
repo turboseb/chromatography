@@ -8,4 +8,4 @@ Currently in progress, the program is designed to simulate factors like solvent 
 <img src="https://github.com/turboseb/chromatography/blob/master/Illustration/chart.gif" width="500">
 
 ## Built in
-**Godot 4.3.stable** which allows for great flexibility and cross-platform compatibility
+<img src="https://github.com/turboseb/chromatography/blob/master/Illustration/godot_scientist.svg" width="128"> **Godot 4.3.stable** which allows for great flexibility and cross-platform compatibility

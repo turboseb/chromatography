@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0qu5s3cpvb1w"]
 
-[ext_resource type="Script" path="res://Plot/inner_plot.gd" id="1_iv7n1"]
-[ext_resource type="Script" path="res://Plot/chart.gd" id="1_mtoxi"]
+[ext_resource type="Script" uid="uid://cv12lvgmcvp4b" path="res://Plot/inner_plot.gd" id="1_iv7n1"]
+[ext_resource type="Script" uid="uid://dx8rw4stle5q0" path="res://Plot/chart.gd" id="1_mtoxi"]
 [ext_resource type="Theme" uid="uid://pmfhiucv8n2o" path="res://Assets/Themes/Chart.tres" id="1_u4qrr"]
-[ext_resource type="Script" path="res://Plot/x_grid.gd" id="2_48y3q"]
-[ext_resource type="Script" path="res://Plot/y_grid.gd" id="3_p2hl4"]
-[ext_resource type="Script" path="res://visualisation of inputs/button.gd" id="4_aglfa"]
-[ext_resource type="Script" path="res://Plot/Labels/label_container.gd" id="6_4vejy"]
+[ext_resource type="Script" uid="uid://bqnul1mt1s3ur" path="res://Plot/x_grid.gd" id="2_48y3q"]
+[ext_resource type="Script" uid="uid://b04yx4x4yebv6" path="res://Plot/y_grid.gd" id="3_p2hl4"]
+[ext_resource type="Script" uid="uid://c6qip18qwdy02" path="res://visualisation of inputs/button.gd" id="4_aglfa"]
+[ext_resource type="Script" uid="uid://dvmjfg4eeudmi" path="res://Plot/Labels/label_container.gd" id="6_4vejy"]
 [ext_resource type="PackedScene" uid="uid://detmflvrt1g70" path="res://Plot/Labels/dataset_label.tscn" id="7_6lwvq"]
 
 [node name="Chart" type="ColorRect" node_paths=PackedStringArray("plot")]
@@ -130,16 +130,10 @@ size_flags_vertical = 3
 
 [node name="InnerPlot" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" node_paths=PackedStringArray("chart", "plot_container", "x_grid", "y_grid")]
 z_index = 1
-custom_minimum_size = Vector2(2000, 2000)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -246.0
-offset_top = 531.0
-offset_right = 1754.0
-offset_bottom = 2531.0
-grow_vertical = 0
+layout_mode = 0
+offset_top = 2000.0
+offset_right = 2000.0
+offset_bottom = 4000.0
 scale = Vector2(1, -1)
 size_flags_vertical = 3
 color = Color(0.305882, 0.305882, 0.305882, 0)
@@ -149,7 +143,7 @@ chart = NodePath("../../../../../../../..")
 plot_container = NodePath("..")
 x_grid = NodePath("../../../XMargin/Control/XGrid")
 y_grid = NodePath("../../../YMargin/Control/YGrid")
-zoom_step = 0.06
+zoom_step = 0.1
 scroll_step = 5.0
 
 [node name="PlotBackground" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot"]
@@ -223,7 +217,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("3_p2hl4")
 inner_plot = NodePath("../../../PlotMargin/PlotContainer/InnerPlot")
-tick_step = 1.0
+tick_step = 500.0
 text_margin = 40
 chart_theme = ExtResource("1_u4qrr")
 

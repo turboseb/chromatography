@@ -9,9 +9,11 @@ extends ColorRect
 var labels: Array[Label]
 
 func _ready() -> void:
+	inner_plot.setup_axies.connect(setup_axis_deferred)
+	#call_deferred("axis_setup")
+
+func setup_axis_deferred() -> void:
 	call_deferred("axis_setup")
-
-
 
 func axis_setup()->void:
 	size.x = inner_plot.size.x
@@ -28,8 +30,9 @@ func axis_setup()->void:
 		new_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		new_label.position = Vector2(point * tick_step * 100 - 2, size.y - text_margin)
-		new_label.text = str(point)
+		new_label.text = str(point * tick_step)
 	_on_inner_plot_item_rect_changed()
+	queue_redraw()
 
 func _draw() -> void:
 	#get each tick_mark point based on the tick step

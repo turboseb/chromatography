@@ -1,5 +1,7 @@
 extends Control
 
+signal setup_axies
+
 @export_category("Chart Data")
 
 ## if the value is positive, it will scale with the zoom; if the vale is negative, the line width will be viewport based and it won't be affected by zoom
@@ -8,7 +10,7 @@ extends Control
 @export_category("Tree Nodes")
 
 ## Root node of the chart tool
-@export var chart: ColorRect
+@export var chart: Chart
 
 ## Control parent of the InnerPlot, used to get the plot visible size
 @export var plot_container: Control
@@ -44,10 +46,29 @@ var scale_limit: Vector2
 
 func _ready() -> void:
 	chart.datasets_changed.connect(dataset_changed)
+	await get_tree().process_frame
+	scale = scale_limit
+	position = Vector2(0, -size.y * scale.y)
 
 func dataset_changed() ->void:
 	queue_redraw()
+	
+	## resize the InnerPlot
+	var max_x: float = 0.0
+	var max_y: float = 0.0
+	for dataset: PackedVector2Array in chart.datasets.values():
+		for point: Vector2 in dataset:
+			max_x = max(point.x, max_x)
+			max_y = max(point.y, max_y)
+	size = Vector2(ceil(max_x/chart.resolution)*chart.resolution, ceil(ceil(max_y/chart.resolution)*chart.resolution * .0004)*10000)
+	print(size)
 	#TODO add label redo
+	setup_axies.emit()
+	set_panning_limit()
+	set_scale_limit()
+	await get_tree().process_frame
+	plot_container_resized()
+
 
 ## Connected to the plot_container resized() signal, called a little after ready on startup
 func plot_container_resized() -> void:
@@ -60,15 +81,17 @@ func plot_container_resized() -> void:
 
 
 ## called on zoom
+@warning_ignore("untyped_declaration")
 func clamp_position(new_position_x = null, new_position_y = null) ->void:
 	set_panning_limit()
-	if new_position_x:
+	if new_position_x != 10e500:
 		position.x = clamp(new_position_x, panning_limit.x, 0)
-	if new_position_y:
+	if new_position_y != 10e500:
 		position.y = clamp(new_position_y, plot_container_size.y, panning_limit.y)
 	item_rect_changed.emit()
 
 ## called by plot_container_resized(), can't be used by zoom functions as they need the zoom ratio to calculate the position offset
+@warning_ignore("untyped_declaration")
 func clamp_scale(new_scale_x = null, new_scale_y = null) ->void:
 	set_scale_limit()
 	if new_scale_x:
@@ -83,14 +106,16 @@ func set_panning_limit() ->void:
 	
 
 func set_scale_limit() ->void:
-	var scale_limit_x =  plot_container_size.x / size.x
-	var scale_limit_y =  -plot_container_size.y / size.y
+	var scale_limit_x: float =  plot_container_size.x / size.x
+	var scale_limit_y: float =  -plot_container_size.y / size.y
 	scale_limit = Vector2(scale_limit_x, scale_limit_y)
 
 
 func _draw() -> void:
-	for dataset in chart.datasets.size():
+	for dataset in range(0, chart.datasets.size()):
 		draw_polyline(chart.datasets.values()[dataset], chart.line_color[dataset], line_width)
+		
+		
 
 ## Called when the input is done as the plot is moused over, also works when releasing said input outside of the plot
 func _on_gui_input(event: InputEvent) -> void:
@@ -169,7 +194,7 @@ func scroll_position(axis: int, movement: float) ->void:
 
 
 func zoom_in_x() -> float:
-	var new_scale_x: float = scale.x + zoom_step
+	var new_scale_x: float = scale.x + zoom_step * scale.x
 	var scale_ratio_x: float = new_scale_x/scale.x - 1.0
 				
 	var new_position_x: float = position.x + (global_position.x - get_viewport().get_mouse_position().x) * scale_ratio_x
@@ -178,7 +203,7 @@ func zoom_in_x() -> float:
 
 
 func zoom_out_x() ->float:
-	var new_scale_x: float = max(scale.x - zoom_step, scale_limit.x)
+	var new_scale_x: float = max(scale.x - zoom_step * scale.x, scale_limit.x)
 	var scale_ratio_x: float = new_scale_x/scale.x - 1.0
 				
 	var new_position_x: float = position.x + (global_position.x - get_viewport().get_mouse_position().x) * scale_ratio_x
@@ -187,7 +212,7 @@ func zoom_out_x() ->float:
 
 
 func zoom_in_y() ->float:
-	var new_scale_y: float = scale.y - zoom_step
+	var new_scale_y: float = scale.y - zoom_step * abs(scale.y)
 	var scale_ratio_y: float = new_scale_y/scale.y - 1.0
 				
 	var new_position_y: float = position.y + (global_position.y - get_viewport().get_mouse_position().y) * scale_ratio_y
@@ -196,7 +221,7 @@ func zoom_in_y() ->float:
 
 
 func zoom_out_y() -> float:
-	var new_scale_y: float = min(scale.y + zoom_step, scale_limit.y)
+	var new_scale_y: float = min(scale.y + zoom_step * abs(scale.y), scale_limit.y)
 	var scale_ratio_y: float = new_scale_y/scale.y - 1.0
 				
 	var new_position_y: float = position.y + (global_position.y - get_viewport().get_mouse_position().y) * scale_ratio_y
@@ -206,7 +231,7 @@ func zoom_out_y() -> float:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if panning:
-			var new_position = position + event.relative
+			var new_position: Vector2 = position + event.relative
 			clamp_position(new_position.x, new_position.y)
 
 

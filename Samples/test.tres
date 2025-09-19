@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Sample" load_steps=8 format=3 uid="uid://brrkqga04omdm"]
+
+[ext_resource type="Script" uid="uid://uj86buu5im2u" path="res://Samples/Analytes/analyte.gd" id="1_4ddvh"]
+[ext_resource type="Script" uid="uid://c146blc6qtft4" path="res://Samples/sample.gd" id="1_dd6qu"]
+[ext_resource type="Script" uid="uid://bxyrm5yl00m6c" path="res://Samples/contained_analyte.gd" id="2_ajguo"]
+
+[sub_resource type="Resource" id="Resource_4ddvh"]
+script = ExtResource("1_4ddvh")
+retention_time = 0.0
+metadata/_custom_type_script = "uid://uj86buu5im2u"
+
+[sub_resource type="Resource" id="Resource_ajguo"]
+script = ExtResource("2_ajguo")
+analyte = SubResource("Resource_4ddvh")
+amount = 1.0
+metadata/_custom_type_script = "uid://bxyrm5yl00m6c"
+
+[sub_resource type="Resource" id="Resource_oek8c"]
+script = ExtResource("1_4ddvh")
+retention_time = 0.0
+metadata/_custom_type_script = "uid://uj86buu5im2u"
+
+[sub_resource type="Resource" id="Resource_w5t3g"]
+script = ExtResource("2_ajguo")
+analyte = SubResource("Resource_oek8c")
+amount = 1.0
+metadata/_custom_type_script = "uid://bxyrm5yl00m6c"
+
+[resource]
+script = ExtResource("1_dd6qu")
+analytes = Array[Object]([SubResource("Resource_ajguo"), SubResource("Resource_w5t3g")])
