@@ -23,10 +23,10 @@ func sample_intensity(ti: float, sample: Sample) -> float:
 ##HACK using area, peak_width, std_dev_left, std_dev_right isn't logical as amount (overall and specific) and program should define it
 func asymmetric_gaussian(x: float, area: float, mean: float, sigma_left: float = 0.1, sigma_right: float = 0.1) -> float:
 	## Calculate the effective standard deviation for normalization
-	var sigma_effective = (sigma_left + sigma_right) / 2.0
+	var sigma_effective: float = (sigma_left + sigma_right) / 2.0
 	
 	# Calculate the amplitude based on the desired area and effective standard deviation
-	var amplitude = area / (sigma_effective * sqrt(2 * PI))
+	var amplitude: float = area / (sigma_effective * sqrt(2 * PI))
 	
 	var y:float
 	if x <= mean:
