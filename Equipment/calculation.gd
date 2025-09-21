@@ -9,7 +9,7 @@ func analyse_sample(sample: Sample, program: Program) -> PackedVector2Array:
 	var t: PackedFloat32Array = range(0, program.max_domain * chart.resolution)
 	for ti in t:
 		ti /= chart.resolution
-		var intensity: float = sample_intensity(ti, sample)
+		var intensity: float = sample_intensity(ti * program.flow_speed, sample)
 		dataset.append(Vector2(ti, intensity))
 	return dataset
 

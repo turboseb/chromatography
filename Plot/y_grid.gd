@@ -27,11 +27,12 @@ func axis_setup()->void:
 		labels.append(new_label)
 		new_label.theme = chart_theme
 		new_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		##HACK - Commenter le positionnement, (size.y/tick_step / 100 - point) représente la position pour l'axe y inversé
-		new_label.position = Vector2(text_margin / 2.0, (size.y/tick_step / 100 - point) * tick_step * 100 + 5)
+		new_label.position = Vector2(0, (size.y/tick_step / 100 - point) * tick_step * 100 + 5)
 		##
-		new_label.text = str((size.y/tick_step / 100 - point) * tick_step)
+		
+		new_label.text = format_scientific_notation((size.y/tick_step / 100 - point) * tick_step)
 	_on_inner_plot_item_rect_changed()
 	queue_redraw()
 
@@ -57,3 +58,13 @@ func _on_inner_plot_item_rect_changed() -> void:
 
 func _on_plot_container_resized() -> void:
 	call_deferred("axis_setup")
+
+
+func format_scientific_notation(value: float) -> String:
+	var exponent: int = str(value).split(".")[0].length() - 1
+	if exponent == 0:
+		return str(value)
+	var coefficient: String = str(value/ pow(10, exponent))
+	var formated_value: String = "%se%s" % [coefficient,str(exponent)]
+	
+	return formated_value

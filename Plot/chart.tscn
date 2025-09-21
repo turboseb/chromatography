@@ -217,7 +217,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("3_p2hl4")
 inner_plot = NodePath("../../../PlotMargin/PlotContainer/InnerPlot")
-tick_step = 500.0
+tick_step = 1000.0
 text_margin = 40
 chart_theme = ExtResource("1_u4qrr")
 

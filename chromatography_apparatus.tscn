@@ -14,7 +14,7 @@ _limits = [0.0, 1.0, 0.0, 20.0]
 _data = [Vector2(0, 0.514592), 0.0, 0.0, 0, 0]
 point_count = 1
 script = ExtResource("2_st4e8")
-flow_speed = 0.0
+flow_speed = 1.0
 metadata/_custom_type_script = "uid://dd7v50cvbwkx6"
 
 [sub_resource type="Resource" id="Resource_vr1i5"]
@@ -40,6 +40,7 @@ amount = 1.0
 metadata/_custom_type_script = "uid://bxyrm5yl00m6c"
 
 [sub_resource type="Resource" id="Resource_fbuy2"]
+resource_name = "Sample"
 script = ExtResource("5_vmvxp")
 analytes = Array[Object]([SubResource("Resource_rpuu0"), SubResource("Resource_4gito")])
 metadata/_custom_type_script = "uid://c146blc6qtft4"

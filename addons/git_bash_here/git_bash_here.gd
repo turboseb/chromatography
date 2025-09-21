@@ -1,10 +1,10 @@
 @tool
 extends EditorPlugin
 
-var shortcut: Shortcut
-
 const PLUGIN_PATH := "plugins/git_bash_here/shortcut"
-var shortcut_res: Shortcut = preload("res://addons/git_bash_here/default_shortcut.tres")
+
+var shortcut: Shortcut
+var shortcut_res: Shortcut = preload("res://addons/git_bash_here/git_bash_here_shortcut.tres")
 
 var timer: SceneTreeTimer
 
@@ -38,4 +38,3 @@ func git_bash_here() -> void:
 	var command: String = 'cd %s  && start "" "C:\\Program Files\\Git\\bin\\sh.exe" && exit' % path
 
 	OS.create_process("cmd.exe", ["/c", command], true)
-#
