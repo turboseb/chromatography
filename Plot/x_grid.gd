@@ -1,6 +1,6 @@
 extends ColorRect
 
-@export var inner_plot: Control
+@export var plot: Plot
 @export var tick_step: float
 @export var grid_color: Color
 @export var text_margin: int
@@ -9,14 +9,14 @@ extends ColorRect
 var labels: Array[Label]
 
 func _ready() -> void:
-	inner_plot.setup_axies.connect(setup_axis_deferred)
+	plot.setup_axies.connect(setup_axis_deferred)
 	#call_deferred("axis_setup")
 
 func setup_axis_deferred() -> void:
 	call_deferred("axis_setup")
 
 func axis_setup()->void:
-	size.x = inner_plot.size.x
+	size.x = plot.size.x
 	size.y = size.y
 	labels = []
 	for child in get_children():
@@ -31,7 +31,7 @@ func axis_setup()->void:
 		new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		new_label.position = Vector2(point * tick_step * 100 - 2, size.y - text_margin)
 		new_label.text = str(point * tick_step)
-	_on_inner_plot_item_rect_changed()
+	_on_plot_item_rect_changed()
 	queue_redraw()
 
 func _draw() -> void:
@@ -41,12 +41,12 @@ func _draw() -> void:
 		draw_line(Vector2(point * tick_step * 100, 0), Vector2(point * tick_step * 100, size.y - text_margin), grid_color)
 
 
-func _on_inner_plot_item_rect_changed() -> void:
+func _on_plot_item_rect_changed() -> void:
 	#scale the grid according to the plot
-	scale.x = inner_plot.scale.x
+	scale.x = plot.scale.x
 	
 	#position the grid accordingly to the plot
-	position.x = inner_plot.position.x
+	position.x = plot.position.x
 	
 	#correct scaling on the axis labels (corrects the stretching caused by anisotropic scaling)
 	for label in labels:

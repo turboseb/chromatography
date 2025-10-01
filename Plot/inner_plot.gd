@@ -1,16 +1,17 @@
+class_name Plot
 extends Control
 
 signal setup_axies
 
-@export_category("Chart Data")
+@export_category("Plot Data")
 
 ## if the value is positive, it will scale with the zoom; if the vale is negative, the line width will be viewport based and it won't be affected by zoom
 @export var line_width: float
 
 @export_category("Tree Nodes")
 
-## Root node of the chart tool
-@export var chart: Chart
+## Root node of the line_chart tool
+@export var line_chart: LineChart
 
 ## Control parent of the InnerPlot, used to get the plot visible size
 @export var plot_container: Control
@@ -45,7 +46,7 @@ var panning_limit: Vector2
 var scale_limit: Vector2
 
 func _ready() -> void:
-	chart.datasets_changed.connect(dataset_changed)
+	line_chart.datasets_changed.connect(dataset_changed)
 	await get_tree().process_frame
 	scale = scale_limit
 	position = Vector2(0, -size.y * scale.y)
@@ -56,12 +57,11 @@ func dataset_changed() ->void:
 	## resize the InnerPlot
 	var max_x: float = 0.0
 	var max_y: float = 0.0
-	for dataset: PackedVector2Array in chart.datasets.values():
+	for dataset: PackedVector2Array in line_chart.datasets.values():
 		for point: Vector2 in dataset:
 			max_x = max(point.x, max_x)
 			max_y = max(point.y, max_y)
-	size = Vector2(ceil(max_x/chart.resolution)*chart.resolution, ceil(ceil(max_y/chart.resolution)*chart.resolution * .0004)*10000)
-	print(size)
+	size = Vector2(ceil(max_x/line_chart.resolution)*line_chart.resolution, ceil(ceil(max_y/line_chart.resolution)*line_chart.resolution * .0004)*10000)
 	#TODO add label redo
 	setup_axies.emit()
 	set_panning_limit()
@@ -112,8 +112,8 @@ func set_scale_limit() ->void:
 
 
 func _draw() -> void:
-	for dataset in range(0, chart.datasets.size()):
-		draw_polyline(chart.datasets.values()[dataset], chart.line_color[dataset], line_width)
+	for dataset in range(0, line_chart.datasets.size()):
+		draw_polyline(line_chart.datasets.values()[dataset], line_chart.line_color[dataset] if dataset < line_chart.line_color.size() else Color.WHITE, line_width)
 		
 		
 

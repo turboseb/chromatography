@@ -1,19 +1,15 @@
 extends Node
 
-@export var program: Program = Program.new()
-@export var sample: Sample
-@export var chart: Chart
+@export var analyses: Array[Analysis]
+@export var line_chart: LineChart
 @export var calculation: Calculation
 
 func _ready() -> void:
-	update_analysis()
-	#chart.clear_dataset()
-	#chart.add_dataset(sample.resource_name, calculation.analyse_sample(sample, program))
-
+	call_deferred("update_analysis")
 
 func update_analysis() -> void:
-	chart.clear_dataset()
-	chart.add_dataset(sample.resource_name, calculation.analyse_sample(sample, program))
+	for analysis in analyses:
+		line_chart.add_dataset(analysis.sample.resource_name, calculation.analyse_sample(analysis.sample, analysis.program))
 
 
 func _on_button_pressed() -> void:

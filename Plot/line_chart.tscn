@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0qu5s3cpvb1w"]
 
 [ext_resource type="Script" uid="uid://cv12lvgmcvp4b" path="res://Plot/inner_plot.gd" id="1_iv7n1"]
-[ext_resource type="Script" uid="uid://dx8rw4stle5q0" path="res://Plot/chart.gd" id="1_mtoxi"]
+[ext_resource type="Script" uid="uid://dx8rw4stle5q0" path="res://Plot/line_chart.gd" id="1_mtoxi"]
 [ext_resource type="Theme" uid="uid://pmfhiucv8n2o" path="res://Assets/Themes/Chart.tres" id="1_u4qrr"]
 [ext_resource type="Script" uid="uid://bqnul1mt1s3ur" path="res://Plot/x_grid.gd" id="2_48y3q"]
 [ext_resource type="Script" uid="uid://b04yx4x4yebv6" path="res://Plot/y_grid.gd" id="3_p2hl4"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dvmjfg4eeudmi" path="res://Plot/Labels/label_container.gd" id="6_4vejy"]
 [ext_resource type="PackedScene" uid="uid://detmflvrt1g70" path="res://Plot/Labels/dataset_label.tscn" id="7_6lwvq"]
 
-[node name="Chart" type="ColorRect" node_paths=PackedStringArray("plot")]
+[node name="LineChart" type="ColorRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,8 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.332881, 0.332881, 0.332881, 1)
 script = ExtResource("1_mtoxi")
-plot = NodePath("MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot")
-line_color = PackedColorArray(1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -40,16 +38,15 @@ vertical = true
 [node name="BoxContainer" type="BoxContainer" parent="MarginContainer/ChartContainer"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="MarginContainer/ChartContainer/BoxContainer"]
-custom_minimum_size = Vector2(120, 0)
+[node name="TitleLabel" type="RichTextLabel" parent="MarginContainer/ChartContainer/BoxContainer"]
 layout_mode = 2
-
-[node name="TitleLabel" type="Label" parent="MarginContainer/ChartContainer/BoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 theme = ExtResource("1_u4qrr")
-theme_override_font_sizes/font_size = 40
-text = "Example Chart"
+bbcode_enabled = true
+text = "[wave]https://github.com/turboseb/chromatography"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="YChartContainer" type="BoxContainer" parent="MarginContainer/ChartContainer"]
 layout_mode = 2
@@ -128,7 +125,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="InnerPlot" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" node_paths=PackedStringArray("chart", "plot_container", "x_grid", "y_grid")]
+[node name="Plot" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" node_paths=PackedStringArray("line_chart", "plot_container", "x_grid", "y_grid")]
+unique_name_in_owner = true
 z_index = 1
 layout_mode = 0
 offset_top = 2000.0
@@ -139,14 +137,14 @@ size_flags_vertical = 3
 color = Color(0.305882, 0.305882, 0.305882, 0)
 script = ExtResource("1_iv7n1")
 line_width = -1.0
-chart = NodePath("../../../../../../../..")
+line_chart = NodePath("../../../../../../../..")
 plot_container = NodePath("..")
 x_grid = NodePath("../../../XMargin/Control/XGrid")
 y_grid = NodePath("../../../YMargin/Control/YGrid")
 zoom_step = 0.1
 scroll_step = 5.0
 
-[node name="PlotBackground" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot"]
+[node name="PlotBackground" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/Plot"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -166,14 +164,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 47
+theme_override_constants/margin_left = 50
 
 [node name="Control" type="Control" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/XMargin"]
 clip_contents = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="XGrid" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/XMargin/Control" node_paths=PackedStringArray("inner_plot")]
+[node name="XGrid" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/XMargin/Control" node_paths=PackedStringArray("plot")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -184,8 +182,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("2_48y3q")
-inner_plot = NodePath("../../../PlotMargin/PlotContainer/InnerPlot")
+plot = NodePath("../../../PlotMargin/PlotContainer/Plot")
 tick_step = 1.0
+grid_color = Color(0, 0, 0, 0.635294)
 text_margin = 30
 chart_theme = ExtResource("1_u4qrr")
 
@@ -205,7 +204,7 @@ clip_contents = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="YGrid" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/YMargin/Control" node_paths=PackedStringArray("inner_plot")]
+[node name="YGrid" type="ColorRect" parent="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/YMargin/Control" node_paths=PackedStringArray("plot")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -216,8 +215,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 script = ExtResource("3_p2hl4")
-inner_plot = NodePath("../../../PlotMargin/PlotContainer/InnerPlot")
+plot = NodePath("../../../PlotMargin/PlotContainer/Plot")
 tick_step = 1000.0
+grid_color = Color(0, 0, 0, 0.635294)
 text_margin = 40
 chart_theme = ExtResource("1_u4qrr")
 
@@ -245,7 +245,7 @@ custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 color = Color(0.151276, 0.151276, 0.151276, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer" node_paths=PackedStringArray("chart", "box_container")]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ChartContainer/YChartContainer/MarginContainer" node_paths=PackedStringArray("line_chart", "box_container")]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 5
@@ -253,7 +253,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 script = ExtResource("6_4vejy")
-chart = NodePath("../../../../..")
+line_chart = NodePath("../../../../..")
 box_container = NodePath("BoxContainer")
 dataset_label = ExtResource("7_6lwvq")
 
@@ -277,21 +277,27 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Control" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 94.0
-offset_top = 20.0
-offset_right = 134.0
-offset_bottom = 60.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="BoxContainer" type="BoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 921.0
-offset_top = -16.0
-offset_right = 1039.0
-offset_bottom = 24.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_bottom = 40.0
+grow_horizontal = 0
 
 [node name="Button3" type="Button" parent="Control/BoxContainer"]
 layout_mode = 2
+focus_mode = 0
 disabled = true
 button_mask = 0
 text = "Shift"
@@ -300,6 +306,7 @@ input_name = "shift"
 
 [node name="Button" type="Button" parent="Control/BoxContainer"]
 layout_mode = 2
+focus_mode = 0
 disabled = true
 button_mask = 0
 text = "Ctrl"
@@ -308,15 +315,16 @@ input_name = "control"
 
 [node name="Button2" type="Button" parent="Control/BoxContainer"]
 layout_mode = 2
+focus_mode = 0
 disabled = true
 button_mask = 0
 text = "Alt"
 script = ExtResource("4_aglfa")
 input_name = "alt"
 
-[connection signal="resized" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot" method="plot_container_resized"]
+[connection signal="resized" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/Plot" method="plot_container_resized"]
 [connection signal="resized" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/XMargin/Control/XGrid" method="_on_plot_container_resized"]
 [connection signal="resized" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/YMargin/Control/YGrid" method="_on_plot_container_resized"]
-[connection signal="gui_input" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot" method="_on_gui_input"]
-[connection signal="item_rect_changed" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/XMargin/Control/XGrid" method="_on_inner_plot_item_rect_changed"]
-[connection signal="item_rect_changed" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/InnerPlot" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/YMargin/Control/YGrid" method="_on_inner_plot_item_rect_changed"]
+[connection signal="gui_input" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/Plot" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/Plot" method="_on_gui_input"]
+[connection signal="item_rect_changed" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/Plot" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/XMargin/Control/XGrid" method="_on_plot_item_rect_changed"]
+[connection signal="item_rect_changed" from="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/PlotMargin/PlotContainer/Plot" to="MarginContainer/ChartContainer/YChartContainer/XChartContainer/Grid/YMargin/Control/YGrid" method="_on_plot_item_rect_changed"]

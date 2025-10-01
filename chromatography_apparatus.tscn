@@ -1,49 +1,93 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0me1lt4cyybj"]
+[gd_scene load_steps=27 format=3 uid="uid://c0me1lt4cyybj"]
 
 [ext_resource type="Script" uid="uid://c2fly71tj2qfu" path="res://Equipment/equipment.gd" id="1_8pxr7"]
 [ext_resource type="Script" uid="uid://dd7v50cvbwkx6" path="res://Equipment/program.gd" id="2_st4e8"]
+[ext_resource type="Script" uid="uid://dk8jrlk3y0mwy" path="res://Equipment/analysis.gd" id="2_v0b5e"]
 [ext_resource type="Script" uid="uid://uj86buu5im2u" path="res://Samples/Analytes/analyte.gd" id="3_v0b5e"]
 [ext_resource type="Script" uid="uid://bxyrm5yl00m6c" path="res://Samples/contained_analyte.gd" id="4_wgjvx"]
 [ext_resource type="Script" uid="uid://c146blc6qtft4" path="res://Samples/sample.gd" id="5_vmvxp"]
 [ext_resource type="Script" uid="uid://bdp2w27ladj7f" path="res://Equipment/calculation.gd" id="6_6vwcq"]
-[ext_resource type="PackedScene" uid="uid://d0qu5s3cpvb1w" path="res://Plot/chart.tscn" id="7_671mo"]
+[ext_resource type="PackedScene" uid="uid://d0qu5s3cpvb1w" path="res://Plot/line_chart.tscn" id="7_671mo"]
 [ext_resource type="Texture2D" uid="uid://qfa55dyeqij5" path="res://Illustration/godot_scientist.svg" id="8_st4e8"]
+[ext_resource type="PackedScene" uid="uid://dyww84gfkx3v0" path="res://Equipment/analysis_window.tscn" id="10_wgjvx"]
 
 [sub_resource type="Curve" id="Curve_coq8p"]
 _limits = [0.0, 1.0, 0.0, 20.0]
 _data = [Vector2(0, 0.514592), 0.0, 0.0, 0, 0]
 point_count = 1
 script = ExtResource("2_st4e8")
-flow_speed = 1.0
+metadata/_custom_type_script = "uid://dd7v50cvbwkx6"
+
+[sub_resource type="Resource" id="Resource_v0b5e"]
+script = ExtResource("3_v0b5e")
+retention_time = 9.7
+metadata/_custom_type_script = "uid://uj86buu5im2u"
+
+[sub_resource type="Resource" id="Resource_vmvxp"]
+script = ExtResource("4_wgjvx")
+analyte = SubResource("Resource_v0b5e")
+metadata/_custom_type_script = "uid://bxyrm5yl00m6c"
+
+[sub_resource type="Resource" id="Resource_6vwcq"]
+script = ExtResource("3_v0b5e")
+retention_time = 10.0
+metadata/_custom_type_script = "uid://uj86buu5im2u"
+
+[sub_resource type="Resource" id="Resource_671mo"]
+script = ExtResource("4_wgjvx")
+analyte = SubResource("Resource_6vwcq")
+metadata/_custom_type_script = "uid://bxyrm5yl00m6c"
+
+[sub_resource type="Resource" id="Resource_t635j"]
+resource_name = "Sample"
+script = ExtResource("5_vmvxp")
+analytes = Array[Object]([SubResource("Resource_vmvxp"), SubResource("Resource_671mo")])
+metadata/_custom_type_script = "uid://c146blc6qtft4"
+
+[sub_resource type="Resource" id="Resource_44vti"]
+script = ExtResource("2_v0b5e")
+program = SubResource("Curve_coq8p")
+sample = SubResource("Resource_t635j")
+metadata/_custom_type_script = "uid://dk8jrlk3y0mwy"
+
+[sub_resource type="Curve" id="Curve_v0b5e"]
+_limits = [0.0, 1.0, 0.0, 25.0]
+_data = [Vector2(0, 0.514592), 0.0, 0.0, 0, 0]
+point_count = 1
+script = ExtResource("2_st4e8")
 metadata/_custom_type_script = "uid://dd7v50cvbwkx6"
 
 [sub_resource type="Resource" id="Resource_vr1i5"]
 script = ExtResource("3_v0b5e")
-retention_time = 3.0
+retention_time = 1.0
 metadata/_custom_type_script = "uid://uj86buu5im2u"
 
 [sub_resource type="Resource" id="Resource_rpuu0"]
 script = ExtResource("4_wgjvx")
 analyte = SubResource("Resource_vr1i5")
-amount = 1.0
 metadata/_custom_type_script = "uid://bxyrm5yl00m6c"
 
 [sub_resource type="Resource" id="Resource_oo8pe"]
 script = ExtResource("3_v0b5e")
-retention_time = 10.0
+retention_time = 15.0
 metadata/_custom_type_script = "uid://uj86buu5im2u"
 
 [sub_resource type="Resource" id="Resource_4gito"]
 script = ExtResource("4_wgjvx")
 analyte = SubResource("Resource_oo8pe")
-amount = 1.0
 metadata/_custom_type_script = "uid://bxyrm5yl00m6c"
 
-[sub_resource type="Resource" id="Resource_fbuy2"]
-resource_name = "Sample"
+[sub_resource type="Resource" id="Resource_wgjvx"]
+resource_name = "Sample2"
 script = ExtResource("5_vmvxp")
 analytes = Array[Object]([SubResource("Resource_rpuu0"), SubResource("Resource_4gito")])
 metadata/_custom_type_script = "uid://c146blc6qtft4"
+
+[sub_resource type="Resource" id="Resource_2mh7p"]
+script = ExtResource("2_v0b5e")
+program = SubResource("Curve_v0b5e")
+sample = SubResource("Resource_wgjvx")
+metadata/_custom_type_script = "uid://dk8jrlk3y0mwy"
 
 [sub_resource type="Gradient" id="Gradient_st4e8"]
 offsets = PackedFloat32Array(0)
@@ -53,18 +97,17 @@ colors = PackedColorArray(0.541176, 0.541176, 0.541176, 0.678431)
 gradient = SubResource("Gradient_st4e8")
 width = 1
 
-[node name="ChromatographyApparatus" type="Node" node_paths=PackedStringArray("chart", "calculation")]
+[node name="ChromatographyApparatus" type="Node" node_paths=PackedStringArray("line_chart", "calculation")]
 script = ExtResource("1_8pxr7")
-program = SubResource("Curve_coq8p")
-sample = SubResource("Resource_fbuy2")
-chart = NodePath("Chart")
+analyses = Array[ExtResource("2_v0b5e")]([SubResource("Resource_44vti"), SubResource("Resource_2mh7p")])
+line_chart = NodePath("LineChart")
 calculation = NodePath("Calculation")
 
-[node name="Calculation" type="Node" parent="." node_paths=PackedStringArray("chart")]
+[node name="Calculation" type="Node" parent="." node_paths=PackedStringArray("line_chart")]
 script = ExtResource("6_6vwcq")
-chart = NodePath("../Chart")
+line_chart = NodePath("../LineChart")
 
-[node name="Chart" parent="." instance=ExtResource("7_671mo")]
+[node name="LineChart" parent="." instance=ExtResource("7_671mo")]
 
 [node name="Button" type="TextureButton" parent="."]
 offset_right = 128.0
@@ -74,5 +117,8 @@ focus_mode = 0
 texture_normal = ExtResource("8_st4e8")
 texture_pressed = SubResource("GradientTexture1D_v0b5e")
 texture_hover = ExtResource("8_st4e8")
+
+[node name="AnalysisWindow" parent="." instance=ExtResource("10_wgjvx")]
+visible = false
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

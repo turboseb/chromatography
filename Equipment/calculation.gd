@@ -2,13 +2,13 @@ class_name Calculation
 extends Node
 
 ##HACK resolution of the graph (points per unit)
-@export var chart: Chart
+@export var line_chart: LineChart
 
 func analyse_sample(sample: Sample, program: Program) -> PackedVector2Array:
 	var dataset: PackedVector2Array
-	var t: PackedFloat32Array = range(0, program.max_domain * chart.resolution)
+	var t: PackedFloat32Array = range(0, program.max_domain * line_chart.resolution)
 	for ti in t:
-		ti /= chart.resolution
+		ti /= line_chart.resolution
 		var intensity: float = sample_intensity(ti * program.flow_speed, sample)
 		dataset.append(Vector2(ti, intensity))
 	return dataset
