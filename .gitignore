@@ -19,3 +19,5 @@ mono_crash.*.json
 
 # My specific ignores
 /Obsidian/
+/addons/
+*.kanban
